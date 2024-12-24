@@ -10,13 +10,14 @@ class Calculator
     parse(numbers_string)
     numbers = numbers_string.split(delimiter).map(&:to_i)
     validates_numbers(numbers)
+    raise ArgumentError, "negative numbers not allowed #{negative_arguments.join(",")}" if negative_arguments.any?
     numbers.sum
   end
 
   private
 
   def validates_numbers(numbers)
-    numbers.each { |number| raise ArgumentError, "negative numbers not allowed #{number}" if number < 0 }
+    numbers.each { |number| negative_arguments.push(number) if number < 0 }
   end
 
   def parse(numbers_string)
