@@ -15,6 +15,11 @@ module SpecUtils
       calculate_sum
     end
 
+    def generate_negative_test_data
+      generate_numbers
+      @numbers = numbers.map { |number| number * -1 }
+    end
+
     private
 
     def generate_numbers
