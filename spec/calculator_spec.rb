@@ -97,6 +97,14 @@ RSpec.describe Calculator do
         data_generator.generate_test_data
         expect(calculator.add("//#{delimiter}\n#{data_generator.numbers.join(delimiter)}")).to eq(data_generator.final_sum)
       end
+
+      it 'adds numbers which have custom delimiter and spaces between them' do
+        calculator = Calculator.new
+        data_generator = SpecUtils::NumberAndSumGenerator.new(2)
+        data_generator.generate_test_data
+        spaces = SpecUtils::WhiteSpaceStringGenerator.generate(rand(100), " ")
+        expect(calculator.add("//#{delimiter}\n#{data_generator.numbers[0]}#{delimiter}" + spaces +  "#{data_generator.numbers[1]}")).to eq(data_generator.final_sum)
+      end
     end
   end
 
