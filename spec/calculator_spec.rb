@@ -134,6 +134,18 @@ RSpec.describe Calculator do
         expect(calculator.add("//#{delimiter}\n#{prefix_spaces}#{number}#{suffix_spaces}")).to  eq(number)
       end
 
+      it 'should add numbers even if newlines are present between custom delimiters' do
+        calculator = Calculator.new
+        data_generator = SpecUtils::NumberAndSumGenerator.new(rand(100))
+        data_generator.generate_test_data
+        input_string = "//#{delimiter}\n"
+        data_generator.numbers.each_with_index do |number, index|
+          input_string = input_string + number.to_s + SpecUtils::WhiteSpaceStringGenerator.generate(rand(10), "\n")
+          input_string = input_string + "#{delimiter}" if index < data_generator.numbers.length - 1
+        end
+        expect(calculator.add(input_string)).to  eq(data_generator.final_sum)
+      end
+
     end
   end
 
