@@ -149,4 +149,14 @@ RSpec.describe Calculator do
     end
   end
 
+  describe 'error cases' do
+    context 'negative numbers' do
+      it "should raise error if negative number is present" do
+        calculator = Calculator.new
+        expect { calculator.add("-1,2") }.to raise_error ArgumentError, "negative numbers not allowed -1"
+      end
+    end
+
+  end
+
 end
