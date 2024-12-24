@@ -20,6 +20,11 @@ module SpecUtils
       @numbers = numbers.map { |number| number * -1 }
     end
 
+    def generate_greater_than_1000
+      generate_numbers
+      @numbers = numbers.map { |number| number * 1000 }
+    end
+
     private
 
     def generate_numbers

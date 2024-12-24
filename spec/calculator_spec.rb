@@ -149,7 +149,7 @@ RSpec.describe Calculator do
     end
   end
 
-  describe 'error cases' do
+  describe 'Resticted cases' do
     context 'negative numbers' do
       it "should raise error if negative number is present" do
         calculator = Calculator.new
@@ -162,6 +162,19 @@ RSpec.describe Calculator do
         data_generator = SpecUtils::NumberAndSumGenerator.new(no_of_numbers)
         data_generator.generate_negative_test_data
         expect { calculator.add("#{data_generator.numbers.join(",")}") }.to raise_error ArgumentError, "negative numbers not allowed #{data_generator.numbers.join(",")}"
+      end
+
+      context "Numbers greater than thousand" do
+        it "should ignore any argument greater than 1000" do
+          calculator = Calculator.new
+          no_of_valid_numbers = rand(100)
+          valid_data_generator = SpecUtils::NumberAndSumGenerator.new(no_of_valid_numbers)
+          valid_numbers = valid_data_generator.generate_test_data
+          no_of_invalid_numbers = rand(100)
+          invalid_data_generator = SpecUtils::NumberAndSumGenerator.new(no_of_invalid_numbers)
+          invalid_numbers = invalid_data_generator.generate_greater_than_1000
+          expect(calculator.add("#{invalid_numbers.join(",")}, #{valid_numbers}")).to eq(valid_data_generator.final_sum)
+        end
       end
     end
 
