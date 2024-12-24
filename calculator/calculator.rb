@@ -4,6 +4,7 @@ class Calculator
 
   def initialize
     @negative_arguments = []
+    @filtered_numbers = []
   end
 
   def add(numbers_string)
@@ -11,7 +12,9 @@ class Calculator
     numbers = numbers_string.split(delimiter).map(&:to_i)
     validates_numbers(numbers)
     raise ArgumentError, "negative numbers not allowed #{negative_arguments.join(",")}" if negative_arguments.any?
-    numbers.sum
+    sum = 0
+    numbers.each { |number| sum += number if number < 1000}
+    sum
   end
 
   private
