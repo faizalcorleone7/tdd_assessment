@@ -102,6 +102,13 @@ RSpec.describe Calculator do
         expect(calculator.add("//#{multiple_length_delimtier}\n#{data_generator.numbers[0]}#{multiple_length_delimtier}" + spaces +  "#{data_generator.numbers[1]}")).to eq(data_generator.final_sum)
       end
 
+      it 'adds more than 2 numbers which have custom delimiter with multiple character length' do
+        calculator = Calculator.new
+        data_generator = SpecUtils::NumberAndSumGenerator.new(rand(10))
+        data_generator.generate_test_data
+        expect(calculator.add("//#{multiple_length_delimtier}\n#{data_generator.numbers.join(multiple_length_delimtier)}")).to eq(data_generator.final_sum)
+      end
+
       it 'adds any number of numbers which have only custom delimiter between them' do
         calculator = Calculator.new
         data_generator = SpecUtils::NumberAndSumGenerator.new(rand(10))
