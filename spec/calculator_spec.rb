@@ -159,7 +159,7 @@ RSpec.describe Calculator do
       it "should raise error if negative number is present" do
         calculator = Calculator.new
         no_of_numbers = rand(100)
-        data_generator = SpecUtils::NumberAndSumGenerator.new(2)
+        data_generator = SpecUtils::NumberAndSumGenerator.new(no_of_numbers)
         data_generator.generate_negative_test_data
         expect { calculator.add("#{data_generator.numbers.join(",")}") }.to raise_error ArgumentError, "negative numbers not allowed #{data_generator.numbers.join(",")}"
       end
