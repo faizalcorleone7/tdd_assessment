@@ -169,11 +169,11 @@ RSpec.describe Calculator do
           calculator = Calculator.new
           no_of_valid_numbers = rand(100)
           valid_data_generator = SpecUtils::NumberAndSumGenerator.new(no_of_valid_numbers)
-          valid_numbers = valid_data_generator.generate_test_data
+          valid_data_generator.generate_test_data
           no_of_invalid_numbers = rand(100)
           invalid_data_generator = SpecUtils::NumberAndSumGenerator.new(no_of_invalid_numbers)
           invalid_numbers = invalid_data_generator.generate_greater_than_1000
-          expect(calculator.add("#{invalid_numbers.join(",")}, #{valid_numbers}")).to eq(valid_data_generator.final_sum)
+          expect(calculator.add("#{invalid_numbers.join(",")}, #{valid_data_generator.numbers.join(",")}")).to eq(valid_data_generator.final_sum)
         end
       end
     end
