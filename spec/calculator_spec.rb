@@ -7,7 +7,7 @@ RSpec.describe Calculator do
     context "when adding numbers which are comma seperated" do
       it 'adds all numbers' do
         calculator = Calculator.new
-        expect(calculator.new.add("3,5")).to eq(8)
+        expect(calculator.add("3,5")).to eq(8)
       end
     end
   end
