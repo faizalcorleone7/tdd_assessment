@@ -1,12 +1,23 @@
 class Calculator
 
-  attr_reader :delimiter
+  attr_reader :delimiter, :negative_arguments
+
+  def initialize
+    @negative_arguments = []
+  end
+
   def add(numbers_string)
     parse(numbers_string)
-    numbers_string.split(delimiter).map(&:to_i).sum
+    numbers = numbers_string.split(delimiter).map(&:to_i)
+    validates_numbers(numbers)
+    numbers.sum
   end
 
   private
+
+  def validates_numbers(numbers)
+    numbers.each { |number| raise ArgumentError, "negative numbers not allowed #{number}" if number < 0 }
+  end
 
   def parse(numbers_string)
     parsed_delimiter = nil
